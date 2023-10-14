@@ -10,7 +10,7 @@ import filterComplexityImg from "assets/images/filter-complexity.png";
 import { Attribute, Complexity } from "utility/hero-types";
 import SearchIcon from "@mui/icons-material/Search";
 import { CustomTextField } from "components/custom-textfield";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { HeroCards } from "components/hero-cards";
 
 import { dota2Heroes } from "utility/hero-data";
@@ -29,68 +29,61 @@ const images = {
 
 const complexities = ["1", "2", "3"];
 
+type AttributeOrNull = Attribute | null;
+type ComplexityOrNull = Complexity | null;
+
+type Filters = {
+  attribute: AttributeOrNull;
+  complexity: ComplexityOrNull;
+};
+
 const Heroes = () => {
-  const [selectedAttribute, setSelectedAttribute] = useState<Attribute | null>(
-    null
-  );
-  const [selectedComplexity, setSelectedComplexity] =
-    useState<Complexity | null>(null);
-  const [heroName, setHeroName] = useState("");
-  // const [filtered, setFiltered] = useState(sortedHeroes);
-
-  const toggleAttributeFilter = (attribute: any) => {
-    if (heroName !== "") return;
-    if (selectedAttribute === attribute) {
-      setSelectedAttribute(null);
-    } else {
-      setSelectedAttribute(attribute);
-    }
-  };
-
-  const toggleComplexityFilter = (complexity: any) => {
-    if (heroName !== "") return;
-    if (selectedComplexity === complexity) {
-      setSelectedComplexity(null);
-    } else {
-      setSelectedComplexity(complexity);
-    }
-  };
-
-  const handleHeroNameFilter = (name: string) => {
-    if (name === "") {
-      // When the input is empty, reapply the previous filters
-      setHeroName(name);
-      // Apply the previous attribute filter
-      if (selectedAttribute !== null) {
-        setSelectedAttribute(selectedAttribute);
-      }
-      // Apply the previous complexity filter
-      if (selectedComplexity !== null) {
-        setSelectedComplexity(selectedComplexity);
-      }
-    } else {
-      // When the user starts typing, clear any active filters
-      setSelectedAttribute(null);
-      setSelectedComplexity(null);
-      setHeroName(name);
-    }
-  };
-
-  const filteredHeroes = sortedHeroes.filter((hero) => {
-    if (selectedAttribute && hero.attribute !== selectedAttribute) {
-      return false;
-    }
-
-    if (selectedComplexity !== null && hero.complexity !== selectedComplexity) {
-      return false;
-    }
-
-    if (heroName && !hero.name.toLowerCase().includes(heroName.toLowerCase())) {
-      return false;
-    }
-
-    return true;
+  const [filters, setFilters] = useState<Filters>({
+    attribute: null,
+    complexity: null,
   });
+  const [heroName, setHeroName] = useState("");
+  const [filtered, setFiltered] = useState(sortedHeroes);
+
+  const applyFilters = (
+    attribute: AttributeOrNull,
+    complexity: ComplexityOrNull
+  ) => {
+    return sortedHeroes.filter((hero) => {
+      if (attribute && hero.attribute !== attribute) {
+        return false;
+      }
+
+      if (complexity !== null && hero.complexity !== complexity) {
+        return false;
+      }
+
+      return true;
+    });
+  };
+
+  const toggleFilter = (
+    filterType: "attribute" | "complexity",
+    value: Attribute | Complexity
+  ) => {
+    if (filters[filterType] === value) {
+      setFilters({ ...filters, [filterType]: null });
+    } else {
+      setFilters({ ...filters, [filterType]: value });
+    }
+  };
+
+  useEffect(() => {
+    let newFilteredHeroes = sortedHeroes;
+    if (heroName) {
+      newFilteredHeroes = newFilteredHeroes.filter((hero) =>
+        hero.name.toLowerCase().includes(heroName.toLowerCase())
+      );
+    } else
+      newFilteredHeroes = applyFilters(filters.attribute, filters.complexity);
+
+    setFiltered(newFilteredHeroes);
+  }, [filters, heroName]);
 
   return (
     <Box
@@ -200,11 +193,14 @@ const Heroes = () => {
                   height={"34px"}
                   component="img"
                   src={img}
-                  onClick={() => toggleAttributeFilter(attribute as Attribute)}
+                  onClick={() =>
+                    toggleFilter("attribute", attribute as Attribute)
+                  }
                   alt={`filter ${attribute}`}
                   sx={{
                     cursor: "pointer",
-                    opacity: selectedAttribute === attribute ? "1" : "0.5",
+                    opacity:
+                      filters.attribute !== attribute || heroName ? "0.5" : "1",
                   }}
                 />
               );
@@ -231,12 +227,18 @@ const Heroes = () => {
                   component="img"
                   src={filterComplexityImg}
                   onClick={() =>
-                    toggleComplexityFilter(complexity as unknown as Complexity)
+                    toggleFilter(
+                      "complexity",
+                      complexity as unknown as Complexity
+                    )
                   }
                   alt={`filter ${complexity}`}
                   sx={{
                     cursor: "pointer",
-                    opacity: selectedComplexity === complexity ? "1" : "0.5",
+                    opacity:
+                      filters.complexity !== complexity || heroName
+                        ? "0.5"
+                        : "1",
                   }}
                 />
               );
@@ -261,7 +263,7 @@ const Heroes = () => {
           />
           <CustomTextField
             value={heroName}
-            onChange={(e) => handleHeroNameFilter(e.target.value)}
+            onChange={(e) => setHeroName(e.target.value)}
           />
         </Box>
       </Box>
@@ -278,7 +280,7 @@ const Heroes = () => {
         gap={2}
       >
         <AnimatePresence>
-          <HeroCards cardSize="small" cards={filteredHeroes} />
+          <HeroCards cardSize="small" cards={filtered} />
         </AnimatePresence>
       </Box>
       <Footer />
