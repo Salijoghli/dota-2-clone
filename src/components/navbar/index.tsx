@@ -228,7 +228,7 @@ export const Navbar = () => {
               width="310px"
               spacing={0.3}
               position="absolute"
-              top={"80%"}
+              top={"60px"}
               py={2}
               bgcolor={"#222"}
               textAlign="left"
@@ -250,7 +250,7 @@ export const Navbar = () => {
                   underline="none"
                   href={`/home?|=${language}`}
                   sx={{
-                    fontSize: "0.7rem",
+                    fontSize: "0.6rem",
                     transition: "all 0.3s",
                     "&:hover": {
                       background: "#fff",

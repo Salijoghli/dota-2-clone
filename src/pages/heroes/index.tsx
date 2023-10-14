@@ -7,7 +7,7 @@ import filterAgilityImg from "assets/images/filter-agility.png";
 import filterIntelligenceImg from "assets/images/filter-intelligence.png";
 import filterUniversalImg from "assets/images/filter-universal.png";
 import filterComplexityImg from "assets/images/filter-complexity.png";
-import { Attribute, Complexity } from "utility/hero-types";
+import { Attribute, Complexity, Dota2Heroes } from "utility/hero-types";
 import SearchIcon from "@mui/icons-material/Search";
 import { CustomTextField } from "components/custom-textfield";
 import { useEffect, useState } from "react";
@@ -43,7 +43,7 @@ const Heroes = () => {
     complexity: null,
   });
   const [heroName, setHeroName] = useState("");
-  const [filtered, setFiltered] = useState(sortedHeroes);
+  const [filtered, setFiltered] = useState<Dota2Heroes>(sortedHeroes);
 
   const applyFilters = (
     attribute: AttributeOrNull,
@@ -54,7 +54,7 @@ const Heroes = () => {
         return false;
       }
 
-      if (complexity !== null && hero.complexity !== complexity) {
+      if (complexity && hero.complexity !== complexity) {
         return false;
       }
 
@@ -279,9 +279,24 @@ const Heroes = () => {
         justifyContent="center"
         gap={2}
       >
-        <AnimatePresence>
-          <HeroCards cardSize="small" cards={filtered} />
-        </AnimatePresence>
+        {filtered.length > 0 ? (
+          <AnimatePresence>
+            <HeroCards cardSize="small" cards={filtered} />
+          </AnimatePresence>
+        ) : (
+          <Typography
+            py={5}
+            variant="h1"
+            letterSpacing={1}
+            width="70%"
+            textAlign="center"
+            sx={{
+              fontSize: { xs: "3rem", sm: "4rem", md: "6rem" },
+            }}
+          >
+            No Heroes match your filter
+          </Typography>
+        )}
       </Box>
       <Footer />
     </Box>

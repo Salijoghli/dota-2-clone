@@ -9,8 +9,8 @@ type HeroCardsProps = {
 export const HeroCards = ({ cards, cardSize }: HeroCardsProps) => {
   return (
     <>
-      {cards.map((card, index) => {
-        return <HeroCard key={index} hero={card} size={cardSize} />;
+      {cards.map((card) => {
+        return <HeroCard key={card.name} hero={card} size={cardSize} />;
       })}
     </>
   );
