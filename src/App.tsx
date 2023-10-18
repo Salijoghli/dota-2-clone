@@ -6,6 +6,7 @@ import News from "./pages/news";
 import PreviousUpdates from "./pages/game/previous-updates";
 import Patches from "./pages/game/patches";
 import GameplayUpdates from "./pages/game/gameplay-updates";
+import Hero from "pages/hero";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="pastupdates" element={<PreviousUpdates />}></Route>
         <Route path="patches" element={<Patches />}></Route>
         <Route path="heroes" element={<Heroes />}></Route>
+        <Route path="hero/:heroName" element={<Hero />}></Route>
         <Route path="news" element={<News />}></Route>
         <Route path="news/updates" element={<GameplayUpdates />}></Route>
         <Route path="esports" element={<Esports />}></Route>
