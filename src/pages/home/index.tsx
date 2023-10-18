@@ -45,9 +45,12 @@ const Home = () => {
         display="flex"
         flexDirection="column"
         justifyContent={"center"}
+        sx={{
+          alignItems: { xs: "center", md: "baseline" },
+        }}
       >
         <HeaderText />
-        <ShadowBox bottom={0} height="100px" direction="toTop" />
+        <ShadowBox height="100px" direction="toTop" />
       </Box>
       <LatestNews />
       <Box

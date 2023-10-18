@@ -24,7 +24,7 @@ export const HeaderText = () => {
     <SlideFromLeft
       spacing={1}
       sx={{
-        px: { xs: "5%", md: "10%" },
+        px: { xs: "10px", md: "10%" },
         width: { xs: "100%", sm: "60%" },
       }}
     >
@@ -36,10 +36,16 @@ export const HeaderText = () => {
         color="rgba(239,240,241)"
         lineHeight={1}
         sx={{
-          fontSize: { xs: "3rem", lg: "4rem" },
+          fontSize: { xs: "2.5rem", sm: "3rem", lg: "4rem" },
+          "&:before": {
+            content: { xs: '""', md: '"“"' },
+          },
+          "&:after": {
+            content: { xs: '""', md: '"”"' },
+          },
         }}
       >
-        "A MODERN MULTIPLAYER MASTERPIECE.”
+        A MODERN MULTIPLAYER MASTERPIECE.
       </Typography>
 
       <Typography variant="body2" color="#818181" letterSpacing={1}>

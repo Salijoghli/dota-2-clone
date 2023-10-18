@@ -30,17 +30,14 @@ export const HeroCard = ({ hero, size = "large" }: HeroCardProps) => {
 
   return (
     <motion.div
-      whileHover={{
-        scale: 1.4,
-        zIndex: 11,
-      }}
+      className="hero-card"
       layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
       style={{
-        width: size === "small" ? "225px" : "255px",
+        width: size === "large" ? "255px" : "225px",
         height: "130px",
         boxShadow: "0 8px 24px rgba(0, 0, 0, 0.5)",
         cursor: "pointer",
@@ -54,7 +51,6 @@ export const HeroCard = ({ hero, size = "large" }: HeroCardProps) => {
           height: "100%",
           padding: "0 2",
         }}
-        className="hero-card"
       >
         <Box
           component={"img"}
@@ -67,22 +63,32 @@ export const HeroCard = ({ hero, size = "large" }: HeroCardProps) => {
             objectFit: "cover",
           }}
         />
+
+        <Box
+          position="relative"
+          bottom={0}
+          display="none"
+          className="hero-shadow"
+        >
+          <ShadowBox height="200px" direction="toTop" />
+        </Box>
+
         <Stack
           className="hero-details"
           flexDirection={"row"}
           py={1}
-          px={"auto"}
+          px={1}
           alignItems="center"
           position="absolute"
-          bottom={0}
+          bottom={size === "large" ? 10 : 0}
           width="100%"
           gap={1}
           color="white"
           sx={{
+            transition: "ease-out 1s",
             display: "none",
           }}
         >
-          <ShadowBox height="200px" direction="toTop" />
           <Box
             component="img"
             src={getAttributeLogo()}
@@ -97,6 +103,7 @@ export const HeroCard = ({ hero, size = "large" }: HeroCardProps) => {
             fontFamily="sans-serif"
             fontSize="18px"
             zIndex={12}
+            lineHeight={1}
           >
             {name}
           </Typography>
