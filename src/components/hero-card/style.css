@@ -1,3 +1,16 @@
+.hero-card {
+  transition: all 100ms ease-out;
+}
+.hero-card:hover {
+  transform: scale(1.29);
+  z-index: 23;
+  border-bottom: black;
+}
+
 .hero-card:hover .hero-details {
   display: flex;
+}
+
+.hero-card:hover .hero-shadow {
+  display: block;
 }

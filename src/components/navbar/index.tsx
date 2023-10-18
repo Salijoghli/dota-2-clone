@@ -100,8 +100,8 @@ export const Navbar = () => {
               px: 2,
 
               transition: "background 0.3s",
-              fontFamily: "sans-serif",
-              fontWeight: 600,
+              fontFamily: "serif",
+              fontWeight: 500,
               "&:hover": {
                 opacity: 1,
                 background: "rgba(255, 255, 255, 0.1)",
@@ -156,15 +156,15 @@ export const Navbar = () => {
             <Link
               variant="h6"
               textTransform="uppercase"
-              letterSpacing={1}
-              fontWeight={600}
-              fontFamily="sans-serif"
+              letterSpacing={1.5}
+              fontWeight={500}
+              fontFamily="serif"
               key={item}
               color="#CCCED0"
               href={`${item}`}
               underline="none"
               sx={{
-                fontSize: { sm: "1rem", md: "1.4rem" },
+                fontSize: { sm: "1rem", md: "1.35rem" },
                 "&:hover": {
                   color: "#fff",
                 },
