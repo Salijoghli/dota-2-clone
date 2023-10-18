@@ -134,6 +134,7 @@ export const Navbar = () => {
                 return (
                   <Link
                     href={`/${gameItem.link}`}
+                    key={gameItem.text}
                     underline="none"
                     color="inherit"
                     variant="body2"
@@ -161,7 +162,7 @@ export const Navbar = () => {
               fontFamily="serif"
               key={item}
               color="#CCCED0"
-              href={`${item}`}
+              href={`/${item}`}
               underline="none"
               sx={{
                 fontSize: { sm: "1rem", md: "1.35rem" },
@@ -241,6 +242,7 @@ export const Navbar = () => {
             >
               {LANGUAGES.map((language) => (
                 <Link
+                  key={language}
                   variant="body2"
                   width="100%"
                   textTransform={"uppercase"}
