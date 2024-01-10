@@ -10,8 +10,7 @@ import {
 } from "@mui/material";
 import { Drawer as MuiDrawer } from "@mui/material";
 import { MouseEvent } from "react";
-
-const navItems = ["Home", "About", "Contact"];
+import { Link } from "react-router-dom";
 
 type DrawerProps = {
   isOpen: boolean;
@@ -34,20 +33,10 @@ export const Drawer = ({ isOpen, closeFn }: DrawerProps) => {
       }}
     >
       <Box sx={{ textAlign: "center" }}>
-        <Typography variant="h6" sx={{ my: 2 }}>
-          MUI
-        </Typography>
         <Button onClick={closeFn}>X</Button>
         <Divider />
-        <List>
-          {navItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: "center" }}>
-                <ListItemText primary={item} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <Link to="/heroes">heroes</Link> <br />
+        <Link to="/">home</Link>
       </Box>
     </MuiDrawer>
   );
