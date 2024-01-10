@@ -33,7 +33,7 @@ export const AnimatedTextContent = ({
           letterSpacing={1}
           lineHeight={1}
           fontWeight={600}
-          fontFamily="sarif"
+          fontFamily="serif"
           color="rgb(130,126,120)"
         >
           {title}
@@ -44,7 +44,8 @@ export const AnimatedTextContent = ({
           letterSpacing={1}
           fontWeight={600}
           lineHeight={1}
-          fontFamily="sarif"
+          fontFamily="serif"
+          // width="100%"
           sx={{
             fontSize: { xs: "3rem", sm: "4rem", md: "5rem", lg: "7rem" },
           }}
