@@ -14,13 +14,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Navigate to="/home" />}></Route>
         <Route path="/home" element={<Home />}></Route>
-        <Route path="pastupdates" element={<PreviousUpdates />}></Route>
-        <Route path="patches" element={<Patches />}></Route>
-        <Route path="heroes" element={<Heroes />}></Route>
-        <Route path="hero/:heroName" element={<Hero />}></Route>
-        <Route path="news" element={<News />}></Route>
-        <Route path="news/updates" element={<GameplayUpdates />}></Route>
-        <Route path="esports" element={<Esports />}></Route>
+        <Route path="/pastupdates" element={<PreviousUpdates />}></Route>
+        <Route path="/patches" element={<Patches />}></Route>
+        <Route path="/heroes" element={<Heroes />}></Route>
+        <Route path="/hero/:heroName" element={<Hero />}></Route>
+        <Route path="/news" element={<News />}></Route>
+        <Route path="/news/updates" element={<GameplayUpdates />}></Route>
+        <Route path="/esports" element={<Esports />}></Route>
         <Route path="*" element={<Navigate to="/home" replace />}></Route>
       </Routes>
     </div>

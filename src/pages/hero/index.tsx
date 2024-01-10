@@ -9,6 +9,7 @@ type HeroParams = {
 
 const Hero = () => {
   const { heroName } = useParams<HeroParams>();
+
   return (
     <Stack
       overflow="hidden"
@@ -18,7 +19,7 @@ const Hero = () => {
       sx={{
         background:
           "url(https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react//backgrounds/greyfade.jpg) no-repeat center top",
-        backgroundSize: "auto",
+        backgroundSize: "100% auto",
       }}
     >
       <Box position="absolute" top={0} left={0} right={0}>

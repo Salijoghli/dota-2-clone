@@ -44,7 +44,7 @@ export const HeroCard = ({ hero, size = "large" }: HeroCardProps) => {
       }}
     >
       <Link
-        to={`/hero/${name.replaceAll(" ", "")}`}
+        to={`/hero/${name}`}
         style={{
           position: "relative",
           width: "100%",
